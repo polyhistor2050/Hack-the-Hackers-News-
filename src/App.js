@@ -19,6 +19,12 @@ const list = [
     },
 ];
 
+function isSeached(searchTerm) {
+    return function(item) {
+        return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+}
+
 class App extends Component {
   
     constructor(props) {
@@ -26,10 +32,12 @@ class App extends Component {
 
         this.state = {
             list: list,
+            searchTerm: "",
         }
         
         // bind method to the class
         this.onDismiss = this.onDismiss.bind(this);
+        this.onSearchChange = this.onSearchChange.bind(this);
     }
 
     onDismiss(id) {
@@ -39,14 +47,21 @@ class App extends Component {
         
         this.setState({list: updatedList});     // update the list in the internal component state
     }
+    
+    onSearchChange(event) {
+        this.setState({ searchTerm: event.target.value });
+    }
 
     render() {
         return (
             <div>
                 <form>
-                    <input type="text" />
+                    <input
+                     type="text"
+                     onChange={this.onSearchChange}
+                    />
                 </form>
-                {this.state.list.map(item => 
+                {this.state.list.filter(isSeached(this.state.searchTerm)).map(item => 
                     <div key={item.objectID}>
                         <span><a href={item.url}>{item.title}</a></span>
                         <p>{item.author}</p>
