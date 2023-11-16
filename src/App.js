@@ -97,9 +97,7 @@ const Search = ({ value, onChange, children}) => {
 }
 
 
-class Table extends Component {
-    render() {
-        const { list, pattern, onDismiss } = this.props;
+const Table = ({ list, pattern, onDismiss }) => {
         return(
             <div>
                 {list.filter(isSeached(pattern)).map(item => {
@@ -123,12 +121,9 @@ class Table extends Component {
                 })}
             </div>
         );
-    }
 }
 
-class Button extends Component {
-    render() {
-        const { className = "", onClick, children } = this.props;
+const Button = ({ className = "", onClick, children }) => {
         return(
             <div>
                 <button
@@ -140,7 +135,6 @@ class Button extends Component {
                 </button>
             </div>
         );
-    }
 }
 
 export default App;
