@@ -83,9 +83,8 @@ class App extends Component {
 }
 
 
-class Search extends Component {
-    render() {
-        const { value, onChange, children } = this.props;
+function Search(props){
+        const { value, onChange, children } = props;
         return(
             <form>
                 {children}
@@ -96,7 +95,6 @@ class Search extends Component {
                 />
             </form>
         );
-    }
 }
 
 
