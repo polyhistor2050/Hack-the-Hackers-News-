@@ -83,7 +83,7 @@ class App extends Component {
 }
 
 
-function Search({ value, onChange, children} ){
+const Search = ({ value, onChange, children}) => {
         return(
             <form>
                 {children}
