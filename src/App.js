@@ -19,6 +19,7 @@ const list = [
     },
 ];
 
+// filter the search keyword based on the title
 function isSeached(searchTerm) {
     return function(item) {
         return item.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -48,6 +49,7 @@ class App extends Component {
         this.setState({list: updatedList});     // update the list in the internal component state
     }
     
+    //save the input value to the local state
     onSearchChange(event) {
         this.setState({ searchTerm: event.target.value });
     }
