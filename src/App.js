@@ -69,9 +69,13 @@ class App extends Component {
                     list={list}
                     pattern={searchTerm}
                     onDismiss={this.onDismiss}
+                />
+
+                <Button
+                    onClick={this.onDismiss}
                 >
-                My Articles
-                </Table>
+                Dismiss
+                </Button>
             </div>
         )
     }
@@ -111,16 +115,32 @@ class Table extends Component {
                             <p>{item.num_comments}</p>
                             <p>{item.points}</p>
                             <span>
-                                <button 
-                                    type='button'
+                                <Button 
                                     onClick={() => onDismiss(item.objectID)}
                                 >
                                     Dismiss
-                                </button>
+                                </Button>
                             </span>
                         </div>
                     )
                 })}
+            </div>
+        );
+    }
+}
+
+class Button extends Component {
+    render() {
+        const { className = "", onClick, children } = this.props;
+        return(
+            <div>
+                <button
+                    onClick={onClick}
+                    type="button"
+                    className={className} 
+                >
+                    {children}
+                </button>
             </div>
         );
     }
