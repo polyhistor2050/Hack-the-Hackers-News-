@@ -286,4 +286,38 @@ STYLING COMPONENT:
 
     <h1 styel={customColor}> My name is James Carter </h1>
 
+LIFE CYCLE METHODS:
+# The constructor is only called when an instance of the component is created and inserted in the dom. The process get instantiated that process is called mounting of the component.
+# The render method is called during the mounting point too but also when the component updates, Each time when the state of the props change, the render method of the component is called.
+
+### Another lifecycle methods
+# componentWillMount();
+# componentDidMount();
+
+# The Contructor is called first, then componentWillMount(), gets called before the render method and componentDidMount() is called after the render method.
+
+----> Mounting Process has 4 life cycle
+1. constructor()
+# It is called when the component get Initialized
+2. componentWillMount()
+# It is called before the render() lifecycle method
+3. render()
+# This lifecycle method is mandatory and return an element as an output of the component
+4. componentDidMount()
+# It is called only once when the component mounted.
+
+----> Update lifecycle Component that happen when state or the props change
+1. componentWillReceiveProps()
+# This lifecycle method is called during an update of lifecycle
+2. shouldComponentUpdate()
+# Its is called when component updates due to state or props change
+3. componentWillUpdate()
+# immediately invoked before the render() method 
+4. render()
+5. componentDidUpdate()
+# immediately invoked after the render() method
+
+----> Unmounting lifecycle
+1. componentWillUnmount()
+# It is called before you destroy your component, you can use this lifecycle method to perform any clean up task
 
