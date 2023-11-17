@@ -45,10 +45,10 @@ class App extends Component {
     }
 
     onDismiss(id) {
-        const updatedList = this.state.list.filter(function isNotId(item) {
-            return item.objectID !== id;    // remove the clicked item
-        });
-        
+        function isNotId(item) {
+            return item.objectID !== id; //remove selected item
+        }
+        const updatedList = this.state.list.filter(isNotId);
         this.setState({list: updatedList});     // update the list in the internal component state
     }
     
