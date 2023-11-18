@@ -21,6 +21,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         
+        //internal component state
         this.state = {
             result: null,
             searchTerm: DEFAULT_QUERY,
@@ -36,7 +37,7 @@ class App extends Component {
         this.setState({ result });
     }
     
-    //fetch data from API Endpoint
+    //fetch data from API Endpoint asynchronously.
     componentDidMount() {
         const { searchTerm } = this.state;
 
@@ -74,7 +75,7 @@ class App extends Component {
                     </Search>
                 </div>
                 <Table 
-                    list={list}
+                    list={result.hits}
                     pattern={searchTerm}
                     onDismiss={this.onDismiss}
                 />

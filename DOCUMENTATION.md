@@ -321,3 +321,9 @@ LIFE CYCLE METHODS:
 1. componentWillUnmount()
 # It is called before you destroy your component, you can use this lifecycle method to perform any clean up task
 
+
+# Javascript shorthand notations
+    if(!result) is equal to using if(result == null)
+    if(!list.length) is equal to using if(list.length === 0)
+    if(something) is equal to using if(something !== '')
+
