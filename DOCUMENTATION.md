@@ -322,7 +322,12 @@ LIFE CYCLE METHODS:
 # It is called before you destroy your component, you can use this lifecycle method to perform any clean up task
 
 
+FETCHING DATA:
+# There is only one Lifecycle method from the one methioned that is used to fetch data: componentDidMount()
+
+
 # Javascript shorthand notations
+
     if(!result) is equal to using if(result == null)
     if(!list.length) is equal to using if(list.length === 0)
     if(something) is equal to using if(something !== '')
@@ -335,9 +340,43 @@ IMMUTABLE DATA STRUCTURE:
 # And all the following arguments are source objects, this object are merged into the target object
 
 # Don't do this
+
     this.state.result.hits = updateHits;
 
-
 # Better approach
+
     const updatedHits = {hits: updatedHits};
     const updatedResult = Object.assign({}, this.state.result, updatedHits);
+
+
+SPREAD OPERATOR:
+# When it is used, every value from the array or object get copied to another array or object
+
+### Spread Operator in array
+    
+# Example 1:
+    
+    const userList = ["Robin", "Andrew", "Dan"];
+    const additionalUser = "Jordan";
+    const allUsers = [ ...userList, additionalUser];
+
+    console.log(allUsers);
+    //output: ["Robin", "Andrew", "Dan", "Jordan"]
+
+# Example 2:
+
+    const oldUser = ["Robin", "Andrew"];
+    const newUser = ["Dan", "Jordan"];
+    const allUsers = [ ...oldUser, ...newUser ];
+
+    console.log(allUsers);
+    //output: ["Robin", "Andrew", "Dan", "Jordan"];
+
+### Object Spread Operator
+
+    const userNames = { firstname: "Robin", lastname: "Andrew" };
+    const age = 28;
+    const user = { ...userNames, age };
+
+    console.log(user);
+    //output: { firstname: "Robin", lastname: "Andrew", age: 28 };   
