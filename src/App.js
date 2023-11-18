@@ -60,7 +60,9 @@ class App extends Component {
     }
     
     render() {
-        const { searchTerm, list } = this.state;
+        const { searchTerm, result } = this.state;
+        if(!result) { return null; }
+
         return (
             <div className='page'>
                 <div className='interactions'>
