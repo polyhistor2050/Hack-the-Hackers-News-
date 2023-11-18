@@ -327,3 +327,17 @@ LIFE CYCLE METHODS:
     if(!list.length) is equal to using if(list.length === 0)
     if(something) is equal to using if(something !== '')
 
+
+IMMUTABLE DATA STRUCTURE:
+# React embraces immutable data structure, so you should'nt mutate an object or mutate the state direct
+# A better approach is to generate a new object based on the information you have, therefore none of the object get altered
+# You can use object.assign(). It takes the first argument as a target object and the target object can be empty object
+# And all the following arguments are source objects, this object are merged into the target object
+
+# Don't do this
+    this.state.result.hits = updateHits;
+
+
+# Better approach
+    const updatedHits = {hits: updatedHits};
+    const updatedResult = Object.assign({}, this.state.result, updatedHits);

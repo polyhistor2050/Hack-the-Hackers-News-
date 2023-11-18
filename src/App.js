@@ -51,8 +51,11 @@ class App extends Component {
         function isNotId(item) {
             return item.objectID !== id; //remove selected item
         }
-        const updatedList = this.state.list.filter(isNotId);
-        this.setState({list: updatedList});     // update the list in the internal component state
+        const updatedHits = this.state.result.hits.filter(isNotId);
+        this.setState({
+            // update the hits in the internal component state
+            result: Object.assign({}, this.state.result, { hits: updatedHits })
+        });     
     }
     
     //save the input value to the local state
