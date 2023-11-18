@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './index.css';
 import './App.css';
 
+
 const DEFAULT_QUERY = 'redux';
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
-
 
 
 // filter the search keyword based on the title
@@ -15,6 +15,7 @@ function isSeached(searchTerm) {
         return item.title.toLowerCase().includes(searchTerm.toLowerCase());
     }
 }
+
 
 class App extends Component {
   
@@ -143,6 +144,7 @@ const Table = ({ list, pattern, onDismiss }) => {
             </div>
         );
 }
+
 
 
 const Button = ({ className = "", onClick, children }) => {
