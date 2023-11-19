@@ -33,7 +33,7 @@ class App extends Component {
         this.onSearchChange = this.onSearchChange.bind(this);
         this.setSearchTopStories = this.setSearchTopStories.bind(this);
     }
-
+    
     setSearchTopStories(result) {
         this.setState({ result });
     }
@@ -78,11 +78,15 @@ class App extends Component {
                     Search:
                     </Search>
                 </div>
-                <Table 
-                    list={result.hits}
-                    pattern={searchTerm}
-                    onDismiss={this.onDismiss}
-                />
+                { result 
+                    ?
+                    <Table 
+                        list={result.hits}
+                        pattern={searchTerm}
+                        onDismiss={this.onDismiss}
+                    />
+                : null
+                }
                 
                 <Button
                     onClick={this.onDismiss}
@@ -160,5 +164,7 @@ const Button = ({ className = "", onClick, children }) => {
             </div>
         );
 }
+
+
 
 export default App;

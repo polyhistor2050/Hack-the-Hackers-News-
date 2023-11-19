@@ -252,7 +252,7 @@ COMPONENT DECLARATION:
 # You cannot access or Update the state with this.state or this.setState() because there is no this object
 # There are no LifeCycle methods such as constructor() and render()
 
---> ES6 CLAS COMPONENT:
+--> ES6 CLASS COMPONENT:
 # They extend from the React Component
 # The extend hooks all the LifeCycle methods available in the React Component API, to the components
 # You can store and manipulate state using this.state and this.setState()
@@ -380,3 +380,25 @@ SPREAD OPERATOR:
 
     console.log(user);
     //output: { firstname: "Robin", lastname: "Andrew", age: 28 };   
+
+
+CONDITIONAL RENDERING:
+# Conditional rendering happen when you want to make a decision to render one or another element
+
+# You can use Tenary operator in conditional rendering
+
+    { result ? "Hello, world" 
+        : null
+    }
+
+# You can use Logical && operator in conditional rendering
+
+    const result = true && "Hello, world";
+    console.log(result);
+
+    //output: Hello, world
+
+    console result = false && "Hello, world";
+    console.log(result);
+
+    //output: false
