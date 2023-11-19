@@ -33,20 +33,24 @@ class App extends Component {
         this.onSearchChange = this.onSearchChange.bind(this);
         this.onSearchSubmit = this.onSearchSubmit.bind(this);
         this.setSearchTopStories = this.setSearchTopStories.bind(this);
+        this.fetchSearchTopStories = this.setSearchTopStories.bind(this);
     }
     
     setSearchTopStories(result) {
         this.setState({ result });
     }
+
+    fetchSearchTopStories(searchTerm) {
+        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+            .then(response => response.json())  // transform response to json formatt
+            .then(result => this.setSearchTopStories(result))
+            .catch(error => error);
+    }
     
     //fetch data from API Endpoint asynchronously.
     componentDidMount() {
         const { searchTerm } = this.state;
-
-        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
-            .then(response => response.json()) //transform response to json formatt
-            .then(result => this.setSearchTopStories(result))
-            .catch(error => error);
+        this.fetchSearchTopStories(searchTerm);
     }
     
     onDismiss(id) {
@@ -67,7 +71,7 @@ class App extends Component {
 
     onSearchSubmit() {
         const { searchTerm } = this.state;
-
+        this.fetchSearchTopStories(searchTerm);
     }
     
     render() {
