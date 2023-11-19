@@ -31,6 +31,7 @@ class App extends Component {
         // bind method to the class
         this.onDismiss = this.onDismiss.bind(this);
         this.onSearchChange = this.onSearchChange.bind(this);
+        this.onSearchSubmit = this.onSearchSubmit.bind(this);
         this.setSearchTopStories = this.setSearchTopStories.bind(this);
     }
     
@@ -62,6 +63,11 @@ class App extends Component {
     //save the input value to the local state
     onSearchChange(event) {
         this.setState({ searchTerm: event.target.value });
+    }
+
+    onSearchSubmit() {
+        const { searchTerm } = this.state;
+
     }
     
     render() {
