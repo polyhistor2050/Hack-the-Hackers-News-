@@ -9,14 +9,6 @@ const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 
 
-// filter the search keyword based on the title
-function isSeached(searchTerm) {
-    return function(item) {
-        return item.title.toLowerCase().includes(searchTerm.toLowerCase());
-    }
-}
-
-
 class App extends Component {
   
     constructor(props) {
@@ -84,18 +76,16 @@ class App extends Component {
                     <Search 
                         value={searchTerm}
                         onChange={this.onSearchChange}
+                        onSubmit={this.onSearchSubmit}
                     >
                     Search:
                     </Search>
                 </div>
-                { result 
-                    ?
+                { result &&
                     <Table 
                         list={result.hits}
-                        pattern={searchTerm}
                         onDismiss={this.onDismiss}
                     />
-                : null
                 }
                 
                 <Button
@@ -111,25 +101,27 @@ class App extends Component {
 
 
 
-const Search = ({ value, onChange, children}) => {
+const Search = ({ value, onChange, onSubmit, children}) => {
         return(
-            <form>
-                {children}
+            <form onSubmit={onSubmit}>
                 <input
                     type="text"
                     value={value}
                     onChange={onChange}
                 />
+                <button type='submit'>
+                    {children}
+                </button>
             </form>
         );
 }
 
 
 
-const Table = ({ list, pattern, onDismiss }) => {
+const Table = ({ list, onDismiss }) => {
         return(
             <div className='table'>
-                {list.filter(isSeached(pattern)).map(item => {
+                {list.map(item => {
                     return(
                         <div key={item.objectID} className='table-row'>
                             <span style={{ width: '40%' }}>
