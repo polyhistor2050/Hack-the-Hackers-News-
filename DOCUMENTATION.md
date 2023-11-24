@@ -408,3 +408,11 @@ PAGINATED FETCH:
 # We can use page property to fetch more paginated sublist as a result by passing next page with the same search term to the API
 
 
+CLIENT-SIDE CACHE:
+# In a client-side fetch you would store each result, When the API request is made to the endpoint.
+# It checks if the result is already there, and if it is there the cache is used
+# Otherwise the API request is made to the endpoint to fetch the data
+
+# The first step is to enable your cache by storing each result by searchKey to the internal component state
+# Then you can retrieve the result depending on the non fluctuant searchKey from your map of the result
+
