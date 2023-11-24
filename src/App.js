@@ -72,13 +72,20 @@ class App extends Component {
     }
     
     onDismiss(id) {
+        const { searchKey, results } = this.state;
+        const { hits, page } = results[searchKey];
+
         function isNotId(item) {
             return item.objectID !== id; // remove selected item
         }
-        const updatedHits = this.state.result.hits.filter(isNotId);
+
+        const updatedHits = hits.filter(isNotId);
+        // update the hits in the internal component state
         this.setState({
-            // update the hits in the internal component state
-            result: { ...this.state.result, hits: updatedHits }
+            results: {
+                ...results,
+                [searchKey] : { hits: updatedHits, page }
+            }
         });     
     }
     
@@ -95,9 +102,23 @@ class App extends Component {
     }
     
     render() {
-        const { searchTerm, result } = this.state;
-        const page = (result && result.page) || 0;
-        if(!result) { return null; }
+        const { 
+            searchTerm,
+            searchKey,
+            results
+        } = this.state;
+
+        const page = (
+            results &&
+            results[searchKey] && 
+            results[searchKey].page
+            ) || 0;
+
+        const list = (
+            results &&
+            results[searchKey] &&
+            results[searchKey].hits
+        ) || [];
 
         return (
             <div className='page'>
@@ -110,15 +131,13 @@ class App extends Component {
                     Search:
                     </Search>
                 </div>
-                { result &&
-                    <Table 
-                        list={result.hits}
-                        onDismiss={this.onDismiss}
-                    />
-                }
+                <Table 
+                    list={list}
+                    onDismiss={this.onDismiss}
+                />
                 <div className='interactions'>
                     <Button
-                        onClick={() => this.fetchSearchTopStories(searchTerm, page +1 )}
+                        onClick={() => this.fetchSearchTopStories(searchKey, page +1 )}
                     >
                     More
                     </Button>
