@@ -402,3 +402,9 @@ CONDITIONAL RENDERING:
     console.log(result);
 
     //output: false
+
+PAGINATED FETCH:
+# The Hacker news API also return a paginated list(page property) which by default is 0 is the first response
+# We can use page property to fetch more paginated sublist as a result by passing next page with the same search term to the API
+
+
