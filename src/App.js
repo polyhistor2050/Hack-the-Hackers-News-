@@ -34,11 +34,12 @@ class App extends Component {
     }
     
     setSearchTopStories(result) {
-        const { hits, page } = this.result;
+        const { hits, page } = result;
+        const { searchKey, results } = this.state;
         
         // check for old hits when the page is 0
-        const oldHits = page !== 0 
-            ? this.state.result.hits 
+        const oldHits = results && results[searchKey] 
+            ? results[searchKey].hits
             : [];
         
         // merge the old hits and new hits
@@ -49,7 +50,10 @@ class App extends Component {
         
         // update local component state with merged hits and page
         this.setState({ 
-            result: {hits, updatedHits, page}
+            results: {
+                ...results,
+                [searchKey]: { hits: updatedHits, page }
+            }
         });
     }
 
