@@ -20,7 +20,8 @@ class App extends Component {
         
         //internal component state
         this.state = {
-            result: null,
+            results: null,
+            searchKey: '',
             searchTerm: DEFAULT_QUERY,
         }
         
@@ -62,6 +63,7 @@ class App extends Component {
     // fetch data from API Endpoint asynchronously.
     componentDidMount() {
         const { searchTerm } = this.state;
+        this.setState( { searchKey: searchTerm });
         this.fetchSearchTopStories(searchTerm);
     }
     
@@ -83,6 +85,7 @@ class App extends Component {
 
     onSearchSubmit(event) {
         const { searchTerm } = this.state;
+        this.setState( { searchKey: searchTerm });
         this.fetchSearchTopStories(searchTerm);
         event.preventDefault();
     }
