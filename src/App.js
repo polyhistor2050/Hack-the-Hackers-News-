@@ -7,6 +7,7 @@ const DEFAULT_QUERY = 'redux';
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
+const PARAM_PAGE = 'page=';
 
 
 class App extends Component {
@@ -29,17 +30,33 @@ class App extends Component {
     }
     
     setSearchTopStories(result) {
-        this.setState({ result });
+        const { hits, page } = this.result;
+        
+        // check for old hits when the page is 0
+        const oldHits = page !== 0 
+            ? this.state.result.hits 
+            : [];
+        
+        // merge the old hits and new hits
+        const updatedHits = [ 
+            ...oldHits,
+             ...hits
+        ];
+        
+        // update local component state with merged hits and page
+        this.setState({ 
+            result: {hits, updatedHits, page}
+        });
     }
 
-    fetchSearchTopStories(searchTerm) {
-        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+    fetchSearchTopStories(searchTerm, page = 0) {
+        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`)
             .then(response => response.json())  // transform response to json formatt
             .then(result => this.setSearchTopStories(result))
             .catch(error => error);
     }
     
-    //fetch data from API Endpoint asynchronously.
+    // fetch data from API Endpoint asynchronously.
     componentDidMount() {
         const { searchTerm } = this.state;
         this.fetchSearchTopStories(searchTerm);
@@ -47,7 +64,7 @@ class App extends Component {
     
     onDismiss(id) {
         function isNotId(item) {
-            return item.objectID !== id; //remove selected item
+            return item.objectID !== id; // remove selected item
         }
         const updatedHits = this.state.result.hits.filter(isNotId);
         this.setState({
@@ -56,7 +73,7 @@ class App extends Component {
         });     
     }
     
-    //save the input value to the local state
+    // save the input value to the local state
     onSearchChange(event) {
         this.setState({ searchTerm: event.target.value });
     }
@@ -69,6 +86,7 @@ class App extends Component {
     
     render() {
         const { searchTerm, result } = this.state;
+        const page = (result && result.page) || 0;
         if(!result) { return null; }
 
         return (
@@ -88,12 +106,13 @@ class App extends Component {
                         onDismiss={this.onDismiss}
                     />
                 }
-                
-                <Button
-                    onClick={this.onDismiss}
-                >
-                Dismiss
-                </Button>
+                <div className='interactions'>
+                    <Button
+                        onClick={() => this.fetchSearchTopStories(searchTerm, page +1 )}
+                    >
+                    More
+                    </Button>
+                </div>
             </div>
         )
     }
@@ -102,7 +121,7 @@ class App extends Component {
 
 
 
-const Search = ({ value, onChange, onSubmit, children}) => {
+const Search = ({ value, onChange, onSubmit, children }) => {
         return(
             <form onSubmit={onSubmit}>
                 <input
