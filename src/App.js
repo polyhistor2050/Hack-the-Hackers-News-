@@ -46,7 +46,7 @@ class App extends Component {
         // merge the old hits and new hits
         const updatedHits = [ 
             ...oldHits,
-             ...hits
+            ...hits
         ];
         
         // update local component state with merged hits and page
@@ -112,6 +112,7 @@ class App extends Component {
     }
     
     render() {
+        
         const { 
             searchTerm,
             searchKey,
