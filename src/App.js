@@ -30,7 +30,7 @@ class App extends Component {
         this.onSearchChange = this.onSearchChange.bind(this);
         this.onSearchSubmit = this.onSearchSubmit.bind(this);
         this.setSearchTopStories = this.setSearchTopStories.bind(this);
-        this.fetchSearchTopStories = this.setSearchTopStories.bind(this);
+        this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
         this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
     }
     
