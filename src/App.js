@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './index.css';
 import './App.css';
+import axios from 'axios';
 
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '100';
-const PATH_BASE = 'https://hpn.algolia.com/api/v1';
+const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
@@ -60,9 +61,8 @@ class App extends Component {
     }
 
     fetchSearchTopStories(searchTerm, page = 0) {
-        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-            .then(response => response.json())  // transform response to json formatt
-            .then(result => this.setSearchTopStories(result))
+        axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+            .then(result => this.setSearchTopStories(result.data))
             .catch(error => this.setState({ error }));
     }
     
