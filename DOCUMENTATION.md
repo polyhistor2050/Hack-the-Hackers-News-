@@ -277,14 +277,14 @@ STYLING COMPONENT:
     className="body"
 
 # For inline styling use
-    <h1 styel={{ color: "red" }}> My name is James Carter </h1>
+    <h1 style={{ color: "red" }}> My name is James Carter </h1>
 
 # Or define a javascript object then use it in your style
     const customColor = {
         color: "red",
     }
-
-    <h1 styel={customColor}> My name is James Carter </h1>
+    
+    <h1 style={customColor}> My name is James Carter </h1>
 
 LIFE CYCLE METHODS:
 # The constructor is only called when an instance of the component is created and inserted in the dom. The process get instantiated that process is called mounting of the component.
