@@ -5,7 +5,7 @@ import './App.css';
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '100';
-const PATH_BASE = 'https://hn.algolia.com/api/v1';
+const PATH_BASE = 'https://hpn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
@@ -133,9 +133,7 @@ class App extends Component {
         ) || [];
 
 
-        if(error) {
-            return <p> Something went wrong. </p>;
-        }
+        
 
         return (
             <div className='page'>
@@ -148,10 +146,15 @@ class App extends Component {
                     Search:
                     </Search>
                 </div>
-                <Table 
+                { error 
+                 ?  <div className='interactions'>
+                    <p>Something Went wrong. </p>
+                 </div>
+               :  <Table 
                     list={list}
                     onDismiss={this.onDismiss}
                 />
+                }
                 <div className='interactions'>
                     <Button
                         onClick={() => this.fetchSearchTopStories(searchKey, page +1 )}
